@@ -2,9 +2,88 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
+import { useState } from 'react';
 
 const Index = () => {
+  const [selectedRarity, setSelectedRarity] = useState('all');
+
+  const weaponSkins = [
+    {
+      id: 1,
+      name: "Cyber Knife",
+      type: "Нож",
+      rarity: "legendary",
+      price: "2499₽",
+      image: "/img/f1ca41f2-1686-4dc2-8423-03fb5a915445.jpg",
+      wear: "Factory New",
+      rarityColor: "from-yellow-400 to-orange-500"
+    },
+    {
+      id: 2,
+      name: "Neon Assault",
+      type: "Автомат",
+      rarity: "epic",
+      price: "1299₽",
+      image: "/img/bfa44825-ef75-470f-81d6-b7b89288305f.jpg",
+      wear: "Minimal Wear",
+      rarityColor: "from-purple-400 to-pink-500"
+    },
+    {
+      id: 3,
+      name: "Electric Storm",
+      type: "Пистолет",
+      rarity: "rare",
+      price: "599₽",
+      image: "/img/7fd1ff6f-15ae-402a-825f-6d01c1b2c21d.jpg",
+      wear: "Field-Tested",
+      rarityColor: "from-blue-400 to-cyan-500"
+    },
+    {
+      id: 4,
+      name: "Plasma Edge",
+      type: "Нож",
+      rarity: "legendary",
+      price: "3199₽",
+      image: "/img/f1ca41f2-1686-4dc2-8423-03fb5a915445.jpg",
+      wear: "Factory New",
+      rarityColor: "from-yellow-400 to-orange-500"
+    },
+    {
+      id: 5,
+      name: "Quantum Rifle",
+      type: "Снайперская винтовка",
+      rarity: "epic",
+      price: "1899₽",
+      image: "/img/bfa44825-ef75-470f-81d6-b7b89288305f.jpg",
+      wear: "Minimal Wear",
+      rarityColor: "from-purple-400 to-pink-500"
+    },
+    {
+      id: 6,
+      name: "Digital Fury",
+      type: "Пистолет",
+      rarity: "common",
+      price: "299₽",
+      image: "/img/7fd1ff6f-15ae-402a-825f-6d01c1b2c21d.jpg",
+      wear: "Well-Worn",
+      rarityColor: "from-gray-400 to-gray-600"
+    }
+  ];
+
+  const rarityFilters = [
+    { id: 'all', name: 'Все', count: weaponSkins.length },
+    { id: 'legendary', name: 'Легендарные', count: weaponSkins.filter(s => s.rarity === 'legendary').length, color: 'text-yellow-400' },
+    { id: 'epic', name: 'Эпические', count: weaponSkins.filter(s => s.rarity === 'epic').length, color: 'text-purple-400' },
+    { id: 'rare', name: 'Редкие', count: weaponSkins.filter(s => s.rarity === 'rare').length, color: 'text-blue-400' },
+    { id: 'common', name: 'Обычные', count: weaponSkins.filter(s => s.rarity === 'common').length, color: 'text-gray-400' }
+  ];
+
+  const filteredSkins = selectedRarity === 'all' 
+    ? weaponSkins 
+    : weaponSkins.filter(skin => skin.rarity === selectedRarity);
+
   const donationPackages = [
     {
       id: 1,
@@ -60,6 +139,7 @@ const Index = () => {
             <nav className="hidden md:flex space-x-8">
               <a href="#home" className="text-gaming-blue hover:text-gaming-orange transition-colors font-roboto">Главная</a>
               <a href="#donate" className="text-gaming-blue hover:text-gaming-orange transition-colors font-roboto">Донаты</a>
+              <a href="#skins" className="text-gaming-blue hover:text-gaming-orange transition-colors font-roboto">Скины</a>
               <a href="#rating" className="text-gaming-blue hover:text-gaming-orange transition-colors font-roboto">Рейтинг</a>
             </nav>
             <Button className="bg-gradient-to-r from-gaming-orange to-gaming-blue hover:scale-105 transition-transform">
@@ -140,6 +220,82 @@ const Index = () => {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Weapon Skins Section */}
+      <section id="skins" className="py-16 px-4">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-orbitron font-bold text-center text-white mb-8">Скины Оружия</h2>
+          <p className="text-center text-gray-300 mb-12 font-roboto">Уникальные скины для твоего арсенала</p>
+          
+          {/* Rarity Filters */}
+          <div className="flex flex-wrap justify-center gap-4 mb-8">
+            {rarityFilters.map((filter) => (
+              <Button
+                key={filter.id}
+                variant={selectedRarity === filter.id ? "default" : "outline"}
+                onClick={() => setSelectedRarity(filter.id)}
+                className={`transition-all hover:scale-105 ${
+                  selectedRarity === filter.id 
+                    ? 'bg-gaming-orange hover:bg-gaming-orange/80' 
+                    : 'border-gaming-blue/30 text-gray-300 hover:border-gaming-orange/50 hover:text-white'
+                }`}
+              >
+                <span className={filter.color || 'text-current'}>{filter.name}</span>
+                <Badge variant="secondary" className="ml-2 bg-gaming-dark/50">
+                  {filter.count}
+                </Badge>
+              </Button>
+            ))}
+          </div>
+
+          {/* Skins Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredSkins.map((skin) => (
+              <Card key={skin.id} className="bg-gaming-dark/80 border-gaming-blue/30 hover:border-gaming-orange/50 transition-all hover:scale-105 group overflow-hidden">
+                <div className="relative">
+                  <img 
+                    src={skin.image} 
+                    alt={skin.name}
+                    className="w-full h-48 object-cover transition-transform group-hover:scale-110"
+                  />
+                  <div className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold bg-gradient-to-r ${skin.rarityColor} text-white`}>
+                    {skin.rarity.toUpperCase()}
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-gaming-dark/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                </div>
+                <CardContent className="p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <div>
+                      <h3 className="font-orbitron font-bold text-white text-lg">{skin.name}</h3>
+                      <p className="text-gaming-blue text-sm">{skin.type}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-bold text-gaming-orange text-lg">{skin.price}</p>
+                      <p className="text-xs text-gray-400">{skin.wear}</p>
+                    </div>
+                  </div>
+                  <div className="flex gap-2 mt-4">
+                    <Button size="sm" className="flex-1 bg-gaming-orange hover:bg-gaming-orange/80">
+                      <Icon name="ShoppingCart" className="w-4 h-4 mr-1" />
+                      Купить
+                    </Button>
+                    <Button size="sm" variant="outline" className="border-gaming-blue text-gaming-blue hover:bg-gaming-blue hover:text-white">
+                      <Icon name="Eye" className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          {filteredSkins.length === 0 && (
+            <div className="text-center py-12">
+              <Icon name="Package" className="w-16 h-16 text-gray-500 mx-auto mb-4" />
+              <p className="text-gray-400 font-roboto">Нет скинов выбранной редкости</p>
+            </div>
+          )}
         </div>
       </section>
 
