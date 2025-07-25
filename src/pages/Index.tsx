@@ -134,7 +134,7 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <img src="/img/14d6eaff-45d8-41f4-89c2-914c13979c3f.jpg" alt="Gaming Logo" className="w-10 h-10 rounded-lg animate-glow" />
-              <h1 className="text-2xl font-orbitron font-bold text-white">GameDonate</h1>
+              <h1 className="text-2xl font-orbitron font-bold text-white">KroriysDoante</h1>
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="#home" className="text-gaming-blue hover:text-gaming-orange transition-colors font-roboto">Главная</a>
@@ -336,7 +336,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="bg-gaming-dark/50 border-t border-gaming-blue/20 py-8 mt-16">
         <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-gray-400 font-roboto">© 2024 GameDonate. Все права защищены.</p>
+          <p className="text-gray-400 font-roboto">© 2024 KroriysDoante. Все права защищены.</p>
           <div className="flex justify-center space-x-6 mt-4">
             <Icon name="Github" className="w-6 h-6 text-gaming-blue hover:text-gaming-orange cursor-pointer transition-colors" />
             <Icon name="Twitter" className="w-6 h-6 text-gaming-blue hover:text-gaming-orange cursor-pointer transition-colors" />
